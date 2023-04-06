@@ -5,7 +5,7 @@ class Obstacle {
 		this.x = width
 		this.y = (Math.random() * height) / 2
 		this.width = 200
-		this.height =200
+		this.height =100
 		this.velocity = 1
 	}
 
@@ -30,6 +30,7 @@ class Obstacle {
 			return false
 		} else {
 			// Increment the score
+			game.eatingsound.play()
 			playerInfo.score += 100
 			if (playerInfo.score > 500)
 			{

@@ -8,8 +8,13 @@ class Game {
 		this.coinImage
 		this.badObstacles = []
 		this.stoneImage
-	//	this.gamesound
-	  //   this.bouncesound
+		this.gamesound
+		this.musicIsPlaying = 0
+	    this.bouncesound
+		this.collisionsound
+		this.eatingsound
+	
+
 	
 	}
 
@@ -22,8 +27,10 @@ class Game {
 			{ src: loadImage("../images/backgroundImages/pic5.png"), x: 0, speed: 4 }
 		]
 		
-	//	this.gamesound = loadSound("../game.mp3") 
-	  //  this.bouncesound = loadSound("../bounce.mp3") 
+		this.gamesound = loadSound("../game.mp3") 
+	    this.bouncesound = loadSound("../bounce.mp3") 
+		this.collisionsound = loadSound("../collision.mp3")
+		this.eatingsound = loadSound("../eat.mp4") 
 
 		this.playerImage = loadImage("../images/backgroundImages/rabbit.png")
 		this.coinImage = loadImage("../images/backgroundImages/carrot.png")
@@ -34,8 +41,8 @@ class Game {
 	checkLosingCondition() {
 		if (this.player.lives < 1) {
 		  fill("red")
-		  textSize(50)
-		  text("You lose!!!,Game Over", 50, 300)
+		  textSize(60)
+		  text("Game Over", 230, 250)
 		  noLoop()
 		}
 	  }
@@ -45,7 +52,11 @@ class Game {
 		this.background.draw()
 		this.player.draw()
 
-	   // this.gamesound.play()
+		if(this.musicIsPlaying===0){
+			this.gamesound.play()
+			this.musicIsPlaying += 1
+		}
+	    
 
 		// Every x frames we want to push a carrot into the array 
 		if (frameCount % 120 === 0) {
@@ -71,7 +82,6 @@ class Game {
 		this.obstacles = this.obstacles.filter(obstacle => {
 			
 			if (obstacle.collision(this.player) || obstacle.x < 0 - obstacle.width) {
-				
 				return false
 			} else {
 				return true
@@ -86,6 +96,8 @@ class Game {
 		} else {
 			return true
 		}
+
+
 	})
 
 	this.checkLosingCondition()
