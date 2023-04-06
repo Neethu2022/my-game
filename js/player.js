@@ -24,7 +24,7 @@ class Player {
 	}
 
 	jump() {
-		this.velocity = -5
+		this.velocity = -3
 		game.bouncesound.play()
 	}
 
